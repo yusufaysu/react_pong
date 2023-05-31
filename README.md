@@ -1,2 +1,2 @@
 # react_pong
-1977 pong game
+Trying to make a 1977 pong game on react.
