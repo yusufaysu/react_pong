@@ -4,9 +4,9 @@ import "./Game.css"
 function ScoreBoard({ scoreLeft, scoreRight }: { scoreLeft: number, scoreRight: number }){
   return(
     <div className='scoreBoard'>
-      <div className="playerRScore">peachadam:{scoreLeft}</div>
+      <div className="playerRScore">peachadam:{scoreLeft/2}</div>
       <div className='vs'>VS</div>
-      <div className="playerLScore">peachadam:{scoreRight}</div>
+      <div className="playerLScore">peachadam:{scoreRight/2}</div>
     </div>
   )
 }
@@ -83,7 +83,7 @@ const Game: React.FC = () => {
         } else if (rightPaddle.y > maxPaddleY) {
           rightPaddle.y = maxPaddleY;
         }
-        
+
         context.fillStyle = 'white';
         context.fillRect(
           leftPaddle.x,
@@ -145,7 +145,7 @@ const Game: React.FC = () => {
           context.fillRect(canvas.width / 2 - grid / 2, i, grid, grid);
         }
       }
-      
+
     }
 
     //input dinleyen yerler
@@ -173,9 +173,9 @@ const Game: React.FC = () => {
       }
     });
 
-    console.log("tarra");
+  
     requestAnimationFrame(loop);
-
+  
   }, []);
 
   return (
