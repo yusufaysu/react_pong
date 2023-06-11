@@ -1,5 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import "./Game.css"
+import soundWin from './assets/gamewin2.mp3';
+import soundLose from './assets/8bit_gamelose.mp3';
+import soundCrashWall from './assets/8bit_crash.mp3';
+import soundCrashPaddle from './assets/8bit_jump.mp3';
 
 function ScoreBoard({ scoreLeft, scoreRight }: { scoreLeft: number, scoreRight: number }){
   return(
@@ -9,6 +13,33 @@ function ScoreBoard({ scoreLeft, scoreRight }: { scoreLeft: number, scoreRight: 
       <div className="playerLScore">peachadam:{scoreRight/2}</div>
     </div>
   )
+}
+
+function playSound(str : string){
+  if (str === "win")
+  {
+    console.log("ehe");
+    const sound = new Audio(soundWin);
+    sound.play();
+  }
+  else if (str === "lose")
+  {
+    console.log("ehe");
+    const sound = new Audio(soundLose);
+    sound.play();
+  }
+  else if (str === "wall")
+  {
+    console.log("ehe");
+    const sound = new Audio(soundCrashWall);
+    sound.play();
+  }
+  else if (str === "paddle")
+  {
+    console.log("ehe");
+    const sound = new Audio(soundCrashPaddle);
+    sound.play();
+  }
 }
 
 const Game: React.FC = () => {
@@ -102,11 +133,13 @@ const Game: React.FC = () => {
         ball.y += ball.dy;
 
         if (ball.y < grid) {
+          playSound("wall");
           ball.y = grid;
           ball.dy *= -1;
         } else if (ball.y + grid > canvas.height - grid) {
           ball.y = canvas.height - grid * 2;
           ball.dy *= -1;
+          playSound("wall");
         }
 
         //gol olma durumu ve resetleme
@@ -131,7 +164,9 @@ const Game: React.FC = () => {
         if (collides(ball, leftPaddle)) {
           ball.dx *= -1;
           ball.x = leftPaddle.x + leftPaddle.width;
+          playSound("paddle");
         } else if (collides(ball, rightPaddle)) {
+          playSound("paddle");
           ball.dx *= -1;
           ball.x = rightPaddle.x - ball.width;
         }
